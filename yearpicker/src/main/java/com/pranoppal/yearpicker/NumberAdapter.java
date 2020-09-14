@@ -10,14 +10,17 @@ import android.widget.TextView;
 public class NumberAdapter extends BaseAdapter {
 
     private Context context;
-    private int[] yearsArray = {0,1,2,3,4,5,6,7,8,9,10};
-    public NumberAdapter(Context context) {
+    private int startDate;
+    private int endDate;
+    public NumberAdapter(Context context, int startDate, int endDate) {
         this.context = context;
+        this.startDate = startDate;
+        this.endDate = endDate;
     }
 
     @Override
     public int getCount() {
-        return yearsArray.length;
+        return endDate - startDate + 1;
     }
 
     @Override
@@ -32,18 +35,11 @@ public class NumberAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        TextView textView;
 
-        if (convertView == null) {
-            textView = new TextView(context);
-            textView.setLayoutParams(new GridView.LayoutParams(50, 10));
-            textView.setPadding(8, 8, 8, 8);
-        }
-        else
-        {
-            textView = (TextView) convertView;
-        }
-        textView.setText(yearsArray[position]);
-        return textView;
+        TextView dummyTextView = new TextView(context);
+        int currentDate = position + startDate;
+        dummyTextView.setText(String.valueOf(currentDate));
+        return dummyTextView;
+
     }
 }

@@ -31,6 +31,8 @@ public class MainActivity extends AppCompatActivity {
                         dialogInterface.dismiss();
                     }
                 })
+                .setStartDate(1970)
+                .setEndDate(2020)
                 .build();
         Button button = findViewById(R.id.dialog);
         button.setOnClickListener(new View.OnClickListener() {

@@ -3,6 +3,7 @@ package com.pranoppal.yearpicker;
 import android.app.Activity;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.GridView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
@@ -13,8 +14,10 @@ public class YearPickerView extends AbstractDialog {
 
     protected YearPickerView(@NonNull final Activity activity,
                              @NonNull DialogButton mPositiveButton,
-                             @NonNull DialogButton mNegativeButton) {
-        super( activity , mPositiveButton , mNegativeButton );
+                             @NonNull DialogButton mNegativeButton,
+                             int startDate,
+                             int endDate) {
+        super( activity , mPositiveButton , mNegativeButton, startDate, endDate );
 
         final AlertDialog.Builder builder = new AlertDialog.Builder(activity);
 
@@ -26,29 +29,12 @@ public class YearPickerView extends AbstractDialog {
 
         mDialog = builder.create();
 
-//
-//        alertDialog.setView(LayoutInflater.from(context).inflate(R.layout.main_calendar,null));
-////        inflate(getContext(), R.layout.main_calendar , this);
-//        gridView = alertDialog.findViewById(R.id.year_grid_view);
-//        gridView.setAdapter(new NumberAdapter(context));
-//        alertDialog.findViewById(R.id.ok).setOnClickListener(new OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                alertDialog.dismiss();
-//            }
-//        });
-//        alertDialog.findViewById(R.id.cancel).setOnClickListener(new OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                alertDialog.dismiss();
-//            }
-//        });
     }
 
     public static class Builder {
         private Activity activity;
-        private int startRange;
-        private int endRange;
+        private int startDate;
+        private int endDate;
         private DialogButton positiveButton;
         private DialogButton negativeButton;
 
@@ -56,6 +42,17 @@ public class YearPickerView extends AbstractDialog {
             this.activity = activity;
         }
 
+        @NonNull
+        public Builder setStartDate(int startDate){
+            this.startDate = startDate;
+            return this;
+        }
+
+        @NonNull
+        public Builder setEndDate(int endDate){
+            this.endDate = endDate;
+            return this;
+        }
         @NonNull
         public Builder setPositiveButton(@NonNull OnClickListener onClickListener){
             positiveButton = new DialogButton(onClickListener);
@@ -70,7 +67,7 @@ public class YearPickerView extends AbstractDialog {
 
         @NonNull
         public YearPickerView build(){
-            return new YearPickerView(activity, positiveButton, negativeButton);
+            return new YearPickerView(activity, positiveButton, negativeButton, startDate, endDate);
         }
     }
 }

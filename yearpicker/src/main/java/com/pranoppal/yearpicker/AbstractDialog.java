@@ -5,6 +5,7 @@ import android.app.Dialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.GridView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -25,6 +26,8 @@ public class AbstractDialog implements DialogInterface {
     protected Activity mActivity;
     protected DialogButton mPositiveButton;
     protected DialogButton mNegativeButton;
+    protected int startDate;
+    protected int endDate;
 
     protected OnDismissListener mOnDismissListener;
     protected OnCancelListener mOnCancelListener;
@@ -33,10 +36,14 @@ public class AbstractDialog implements DialogInterface {
 
     protected AbstractDialog(@NonNull Activity mActivity,
                              @NonNull DialogButton mPositiveButton,
-                             @NonNull DialogButton mNegativeButton) {
+                             @NonNull DialogButton mNegativeButton,
+                             int startDate,
+                             int endDate) {
         this.mActivity = mActivity;
         this.mPositiveButton = mPositiveButton;
         this.mNegativeButton = mNegativeButton;
+        this.endDate = endDate;
+        this.startDate = startDate;
     }
 
     protected View createView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container) {
@@ -62,69 +69,9 @@ public class AbstractDialog implements DialogInterface {
             }
         });
 
-
-//        // Apply Styles
-//        TypedArray a = mActivity.getTheme().obtainStyledAttributes(R.styleable.MaterialDialog);
-//
-//        try {
-//            // Set Dialog Background
-//            dialogView.setBackgroundColor(
-//                    a.getColor(R.styleable.MaterialDialog_material_dialog_background,
-//                            mActivity.getResources().getColor(R.color.material_dialog_background)));
-//
-//            // Set Title Text Color
-//            mTitleView.setTextColor(
-//                    a.getColor(R.styleable.MaterialDialog_material_dialog_title_text_color,
-//                            mActivity.getResources().getColor(R.color.material_dialog_title_text_color)));
-//
-//            // Set Message Text Color
-//            mMessageView.setTextColor(
-//                    a.getColor(R.styleable.MaterialDialog_material_dialog_message_text_color,
-//                            mActivity.getResources().getColor((R.color.material_dialog_message_text_color))));
-//
-//            // Set Positive Button Icon Tint
-//            ColorStateList mPositiveButtonTint = a.getColorStateList(
-//                    R.styleable.MaterialDialog_material_dialog_positive_button_text_color);
-//
-//            if (mPositiveButtonTint == null) {
-//                mPositiveButtonTint = ContextCompat.getColorStateList(
-//                        mActivity.getApplicationContext(),
-//                        R.color.material_dialog_positive_button_text_color);
-//            }
-//            mPositiveButtonView.setTextColor(mPositiveButtonTint);
-//            mPositiveButtonView.setIconTint(mPositiveButtonTint);
-//
-//            // Set Negative Button Icon & Text Tint
-//            ColorStateList mNegativeButtonTint = a.getColorStateList(
-//                    R.styleable.MaterialDialog_material_dialog_negative_button_text_color);
-//
-//            if (mNegativeButtonTint == null) {
-//                mNegativeButtonTint = ContextCompat.getColorStateList(
-//                        mActivity.getApplicationContext(),
-//                        R.color.material_dialog_negative_button_text_color);
-//            }
-//            mNegativeButtonView.setIconTint(mNegativeButtonTint);
-//            mNegativeButtonView.setTextColor(mNegativeButtonTint);
-//
-//            // Set Positive Button Background Tint
-//            ColorStateList mBackgroundTint = a.getColorStateList(
-//                    R.styleable.MaterialDialog_material_dialog_positive_button_color);
-//
-//            if (mBackgroundTint == null) {
-//                mBackgroundTint = ContextCompat.getColorStateList(
-//                        mActivity.getApplicationContext(),
-//                        R.color.material_dialog_positive_button_color);
-//            }
-//            mPositiveButtonView.setBackgroundTintList(mBackgroundTint);
-//            if (mBackgroundTint != null) {
-//                mNegativeButtonView.setRippleColor(mBackgroundTint.withAlpha(75));
-//            }
-//
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        } finally {
-//            a.recycle();
-//        }
+        GridView gridView = dialogView.findViewById(R.id.year_grid_view);
+        NumberAdapter numberAdapter = new NumberAdapter(mActivity,startDate, endDate);
+        gridView.setAdapter(numberAdapter);
 
         return dialogView;
     }
