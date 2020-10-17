@@ -6,8 +6,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
-import com.pranoppal.yearpicker.AbstractDialog;
-import com.pranoppal.yearpicker.YearPickerView;
+import com.pranoppal.yearpicker.ui.AbstractDialog;
+import com.pranoppal.yearpicker.ui.YearPickerView;
 import com.pranoppal.yearpicker.interfaces.DialogInterface;
 
 public class MainActivity extends AppCompatActivity {

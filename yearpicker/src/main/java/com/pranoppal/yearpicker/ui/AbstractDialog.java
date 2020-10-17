@@ -1,4 +1,6 @@
-package com.pranoppal.yearpicker;
+package com.pranoppal.yearpicker.ui;
+
+import java.util.ArrayList;
 
 import android.app.Activity;
 import android.app.Dialog;
@@ -10,11 +12,16 @@ import android.widget.GridView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import com.pranoppal.yearpicker.R;
 import com.pranoppal.yearpicker.interfaces.DialogInterface;
 import com.pranoppal.yearpicker.interfaces.OnCancelListener;
 import com.pranoppal.yearpicker.interfaces.OnDismissListener;
 import com.pranoppal.yearpicker.interfaces.OnShowListener;
 import com.pranoppal.yearpicker.model.DialogButton;
+import com.pranoppal.yearpicker.ui.adapters.NumberAdapter;
+import com.pranoppal.yearpicker.ui.adapters.YearListAdapter;
 
 public class AbstractDialog implements DialogInterface {
 
@@ -69,13 +76,31 @@ public class AbstractDialog implements DialogInterface {
             }
         });
 
-        GridView gridView = dialogView.findViewById(R.id.year_grid_view);
-        NumberAdapter numberAdapter = new NumberAdapter(mActivity,startDate, endDate);
-        gridView.setAdapter(numberAdapter);
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(mActivity, 3);
+        RecyclerView recyclerView = dialogView.findViewById(R.id.rv_year_list);
+        YearListAdapter yearListAdapter = new YearListAdapter(getYearsList());
+        recyclerView.setLayoutManager(gridLayoutManager);
+        recyclerView.setAdapter(yearListAdapter);
+        yearListAdapter.notifyDataSetChanged();
+//        GridView gridView = dialogView.findViewById(R.id.year_grid_view);
+//        NumberAdapter numberAdapter = new NumberAdapter(mActivity,startDate, endDate);
+//        gridView.setAdapter(numberAdapter);
 
         return dialogView;
     }
 
+    private ArrayList<Integer> getYearsList(){
+        ArrayList<Integer> years = new ArrayList<>();
+        years.add(2000);
+        years.add(2001);
+        years.add(2002);
+        years.add(2003);
+        years.add(2004);
+        years.add(2005);
+        years.add(2006);
+        years.add(2007);
+        return years;
+    }
     /**
      * Displays the Dialog
      */

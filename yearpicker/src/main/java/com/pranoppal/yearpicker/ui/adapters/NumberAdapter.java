@@ -1,4 +1,4 @@
-package com.pranoppal.yearpicker;
+package com.pranoppal.yearpicker.ui.adapters;
 
 import android.content.Context;
 import android.view.View;

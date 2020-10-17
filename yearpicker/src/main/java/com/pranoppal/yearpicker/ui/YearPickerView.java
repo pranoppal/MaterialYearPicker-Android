@@ -1,9 +1,8 @@
-package com.pranoppal.yearpicker;
+package com.pranoppal.yearpicker.ui;
 
 import android.app.Activity;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.GridView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;

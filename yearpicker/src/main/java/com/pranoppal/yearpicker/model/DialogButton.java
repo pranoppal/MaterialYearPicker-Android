@@ -1,6 +1,6 @@
 package com.pranoppal.yearpicker.model;
 
-import com.pranoppal.yearpicker.AbstractDialog;
+import com.pranoppal.yearpicker.ui.AbstractDialog;
 
 public class DialogButton {
     private AbstractDialog.OnClickListener onClickListener;
